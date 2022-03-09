@@ -18,6 +18,7 @@
     "@swc/core": "^1.2.151",
     "@swc/jest": "^0.2.20",
     "@types/express": "^4.17.13",
+    "@types/jest": "^27.4.1",
     "jest": "^27.5.1",
     "nodemon": "^2.0.15",
     "ts-node": "^10.7.0",
