@@ -1,6 +1,6 @@
-import { CreateVideoDTO } from './../../../src/entities/video/create-video-dto';
+import { CreateVideoDTO } from './../../../src/domain/entities/video/create-video-dto';
 // import { CreateVideoDTO } from './../../../src/entities/video/create-video-dto';
-import { Video } from './../../../src/entities/video/video';
+import { Video } from './../../../src/domain/entities/video/video';
 
 // const videoCreateDTO: CreateVideoDTO = {
 const validVideoCreateDTO: CreateVideoDTO = {

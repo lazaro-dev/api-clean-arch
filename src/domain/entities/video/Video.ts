@@ -1,6 +1,6 @@
-import { InvalidSlugError } from '@/entities/errors/invalid-slug-error';
+import { InvalidSlugError } from '@/domain/errors/invalid-slug-error';
 import { left, right, Either } from '@/shared';
-import { Slug } from '@/entities/object-values/slug';
+import { Slug } from '@/domain/object-values/slug';
 import { CreateVideoDTO } from './create-video-dto';
 export class Video {
 

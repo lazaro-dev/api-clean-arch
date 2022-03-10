@@ -1,6 +1,6 @@
-import { InvalidSlugError } from '@/entities/errors/invalid-slug-error';
+import { InvalidSlugError } from '@/domain/errors/invalid-slug-error';
 import { left, right, Either } from '@/shared/either';
-import { valid } from "@/entities/validators";
+import { valid } from "@/domain/validators";
 
 export class Slug {
 
