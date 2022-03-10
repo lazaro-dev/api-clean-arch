@@ -1,18 +1,25 @@
 import { CreateVideoDTO } from './../../../src/entities/video/create-video-dto';
-import { Video } from './../../../src/entities/video/Video';
+// import { CreateVideoDTO } from './../../../src/entities/video/create-video-dto';
+import { Video } from './../../../src/entities/video/video';
+
+// const videoCreateDTO: CreateVideoDTO = {
+const validVideoCreateDTO: CreateVideoDTO = {
+    url: 'https://github.com',
+    title: 'Titulo 1',
+    desc: 'Descricao 1',
+    screenplay: 'Qualquer coisa',
+    slug: 'titulo'
+}
 
 describe('Video domain entity', () => {
-    test('should create video', () => {
-        const videoCreateDTO: CreateVideoDTO = {
-            url: 'https://github.com',
-            title: 'Titulo 1',
-            desc: 'Descricao 1',
-            screenplay: 'Qualquer coisa',
-            slug: 'titulo-1'
-        }
+    test('should create video with data valid', () => {
 
-        const video = Video.create(videoCreateDTO)
+        const video: Video = Video.create(validVideoCreateDTO).value as Video
 
-        expect(video).toBeInstanceOf(Video)
+        expect(video.url).toEqual(validVideoCreateDTO.url)
+        expect(video.desc).toEqual(validVideoCreateDTO.desc)
+        expect(video.title).toEqual(validVideoCreateDTO.title)
+        expect(video.slug.value).toEqual(validVideoCreateDTO.slug)
+        expect(video.screenplay).toEqual(validVideoCreateDTO.screenplay)
     });
 });
