@@ -2,17 +2,19 @@ import { InvalidSlugError } from '@/domain/errors/invalid-slug-error';
 import { left, right, Either } from '@/shared';
 import { Slug } from '@/domain/object-values/slug';
 import { CreateVideoDTO } from './create-video-dto';
+import { v4 as uuidv4 } from 'uuid';
+
 export class Video {
 
     private constructor(private _url: string, private _desc: string, private _title: string, 
-                        private _slug: Slug, private _screenplay: string)
+                        private _slug: Slug, private _screenplay: string, private _id?: string)
     {
-        // this._url = _url;
-        // this._desc = _desc;
-        // this._title = _title;
-        // this._slug = _slug;
-        // this._screenplay = _screenplay;
+        this._id = this._id ? this._id : uuidv4();//Dependencia de boa para pequenas e medias aplicações
         Object.freeze(this)
+    }
+
+    get id () {
+        return this._id
     }
 
     get url () {
