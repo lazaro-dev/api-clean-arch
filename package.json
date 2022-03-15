@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "express": "^4.17.3",
-    "tsc": "^2.0.4"
+    "tsc": "^2.0.4",
+    "uuidv4": "^6.2.12"
   },
   "devDependencies": {
     "@swc/core": "^1.2.151",
