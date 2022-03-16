@@ -10,12 +10,26 @@ const validVideoCreateDTO: CreateVideoDTO = {
     screenplay: 'Qualquer coisa',
     slug: 'titulo'
 }
+const videoWithInvalidSlug: CreateVideoDTO = {
+    url: 'https://github.com',
+    title: 'Titulo 1',
+    desc: 'Descricao 1',
+    screenplay: 'Qualquer coisa',
+    slug: 'titulo+12'
+}
+
+const sut = () => {
+    const memoryVideoRepository = new MemoryVideoRepository()
+    const createVideoUseCase = new CreateVideo(memoryVideoRepository)
+    return {
+        memoryVideoRepository,
+        createVideoUseCase
+    }
+}
 
 describe('Create video use case', () => {
     test('should create video with data valid', async () => {
-
-        const memoryVideoRepository = new MemoryVideoRepository()
-        const createVideoUseCase = new CreateVideo(memoryVideoRepository)
+        const { memoryVideoRepository, createVideoUseCase} = sut();
 
         const videoResponse: Video = (await createVideoUseCase.execute(validVideoCreateDTO)).value as Video;
         const video: Video = await memoryVideoRepository.findById(videoResponse.id);
@@ -27,14 +41,11 @@ describe('Create video use case', () => {
         expect(video.screenplay).toEqual(videoResponse.screenplay)
     });
 
-    test('should not create video with data valid', async () => {
+    test('should not create video with invalid slug', async () => {
+        const { createVideoUseCase} = sut();
 
-        // const video: Video = Video.create(validVideoCreateDTO).value as Video
+        const response: Error = (await createVideoUseCase.execute(videoWithInvalidSlug)).value as Error;
 
-        // expect(video.url).toEqual(validVideoCreateDTO.url)
-        // expect(video.desc).toEqual(validVideoCreateDTO.desc)
-        // expect(video.title).toEqual(validVideoCreateDTO.title)
-        // expect(video.slug.value).toEqual(validVideoCreateDTO.slug)
-        // expect(video.screenplay).toEqual(validVideoCreateDTO.screenplay)
+        expect(response.name).toEqual('InvalidSlugError')
     });
 });
