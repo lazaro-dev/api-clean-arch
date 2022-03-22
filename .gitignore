@@ -1,1 +1,4 @@
 node_modules
+mysqldata
+phpmyadmin_data
+.env
