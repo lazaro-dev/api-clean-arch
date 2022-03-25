@@ -3,13 +3,13 @@ import { InvalidSlugError } from '@/domain/errors/invalid-slug-error';
 import { Video } from '../../domain/entities/video/Video';
 import { UseCase } from '@/use-cases/ports/use-case';
 import { VideoRepository } from '@/repositories/ports/video-repository';
-import { CreateVideoDTO } from '@/domain/entities/video/create-video-dto';
+import { VideoDTO } from '@/domain/entities/video/video-dto';
 
 export class CreateVideo implements UseCase
 {
     constructor(private videoRepository: VideoRepository){}
 
-    async execute(request: CreateVideoDTO): Promise<Either<InvalidSlugError, Video>> 
+    async execute(request: VideoDTO): Promise<Either<InvalidSlugError, VideoDTO>> 
     {
         const videoOrError = Video.create(request)
         if (videoOrError.isLeft()) {

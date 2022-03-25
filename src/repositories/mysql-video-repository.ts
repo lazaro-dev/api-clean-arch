@@ -16,17 +16,17 @@ export class MysqlVideoRepository implements VideoRepository {
 
     async create(video: Video): Promise<Video> {
         throw new Error('Method not implemented.');
-        const newVideo = await prismaClient.video.create({
-            data: {
-                url: video.url,
-                filename: video.filename,
-                desc: video.desc,
-                title: video.title,
-                slug: video.slug.value,
-                screenplay: video.screenplay,
-            },
-        });
+        // const newVideo = await prismaClient.video.create({
+        //     data: {
+        //         url: video.url,
+        //         filename: video.filename,
+        //         desc: video.desc,
+        //         title: video.title,
+        //         slug: video.slug.value,
+        //         screenplay: video.screenplay,
+        //     },
+        // });
 
-        return VideoMap.toDomain(newVideo)
+        // return VideoMap.toDomain(newVideo)
     }
 }
