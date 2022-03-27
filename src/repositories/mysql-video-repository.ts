@@ -1,32 +1,39 @@
-import { VideoDTO } from '@/domain/entities/video/video-dto';
 import { Video } from '@/domain/entities/video/Video';
 import { prismaClient } from '@/external/database/prisma';
 import { VideoRepository } from '@/repositories/ports/video-repository';
-import { VideoMap } from './mappers/video-map';
+import { VideoData } from './ports';
 
-export class MysqlVideoRepository implements VideoRepository {
+export class MysqlVideoRepository implements VideoRepository 
+{
+    async findById(id: string): Promise<VideoData | null> 
+    {
+        const videoData: VideoData | null = await prismaClient.video.findFirst({
+            where: { id }
+        })
 
-    async findById(id: string): Promise<VideoDTO | null> {
-        throw new Error('Method not implemented.');
+        return videoData
     }
 
-    async getAll(): Promise<VideoDTO[]> {
-        throw new Error('Method not implemented.');
+    async getAll(): Promise<VideoData[]>
+    {
+        const videoData: VideoData[] = await prismaClient.video.findMany()
+
+        return videoData
     }
 
-    async create(video: Video): Promise<Video> {
-        throw new Error('Method not implemented.');
-        // const newVideo = await prismaClient.video.create({
-        //     data: {
-        //         url: video.url,
-        //         filename: video.filename,
-        //         desc: video.desc,
-        //         title: video.title,
-        //         slug: video.slug.value,
-        //         screenplay: video.screenplay,
-        //     },
-        // });
+    async create(video: Video): Promise<VideoData>
+    {
+        const newVideo = await prismaClient.video.create({
+            data: {
+                url: video.url,
+                filename: video.filename,
+                desc: video.desc,
+                title: video.title,
+                slug: video.slug.value,
+                screenplay: video.screenplay,
+            },
+        });
 
-        // return VideoMap.toDomain(newVideo)
+        return newVideo
     }
 }
