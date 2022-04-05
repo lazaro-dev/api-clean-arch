@@ -1,0 +1,1 @@
+export * from './slug-generate-service';
