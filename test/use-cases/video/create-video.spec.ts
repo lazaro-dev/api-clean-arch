@@ -3,23 +3,6 @@ import { MemoryVideoRepository } from './../../../src/repositories/memory-video-
 import { VideoDTO } from '../../../src/domain/entities/video/video-dto';
 import { Video } from '../../../src/domain/entities/video/video';
 
-const validVideoCreateDTO: VideoDTO = {
-    url: 'https://github.com',
-    title: 'Titulo 1',
-    filename: 'filename.mp4',
-    desc: 'Descricao 1',
-    screenplay: 'Qualquer coisa',
-    slug: 'titulo'
-}
-const videoWithInvalidSlug: VideoDTO = {
-    url: 'https://github.com',
-    title: 'Titulo 1',
-    filename: 'filename.mp4',
-    desc: 'Descricao 1',
-    screenplay: 'Qualquer coisa',
-    slug: 'titulo+12'
-}
-
 const sut = () => {
     const memoryVideoRepository = new MemoryVideoRepository()
     const createVideoUseCase = new CreateVideo(memoryVideoRepository)
@@ -32,8 +15,17 @@ const sut = () => {
 describe('Create video use case', () => {
     test('should create video with data valid', async () => {
         const { memoryVideoRepository, createVideoUseCase} = sut();
-
-        const videoResponse: VideoDTO = (await createVideoUseCase.execute(validVideoCreateDTO)).value as Video;
+        const httpRequest = {
+            body: {
+                url: 'https://github.com',
+                title: 'Titulo 1',
+                filename: 'filename.mp4',
+                desc: 'Descricao 1',
+                screenplay: 'Qualquer coisa',
+                slug: 'titulo+12'
+            }
+        }
+        const videoResponse: VideoDTO = (await createVideoUseCase.execute(httpRequest)).value as Video;
         const video: VideoDTO = await memoryVideoRepository.findById(videoResponse.id);
 
         expect(video.url).toEqual(videoResponse.url)
@@ -44,9 +36,20 @@ describe('Create video use case', () => {
     });
 
     test('should not create video with invalid slug', async () => {
-        const { createVideoUseCase} = sut();
+        const { createVideoUseCase } = sut();
 
-        const response: Error = (await createVideoUseCase.execute(videoWithInvalidSlug)).value as Error;
+        const httpRequest = {
+            body: {
+                url: 'https://github.com',
+                title: 'Titulo 1',
+                filename: 'filename.mp4',
+                desc: 'Descricao 1',
+                screenplay: 'Qualquer coisa',
+                slug: '_1'
+            }
+        }
+
+        const response: Error = (await createVideoUseCase.execute(httpRequest)).value as Error;
 
         expect(response.name).toEqual('InvalidSlugError')
     });
