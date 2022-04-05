@@ -1,6 +1,6 @@
 export class ServerError extends Error implements ControllerError {
-    constructor (reason: string) {
-      super('Server error: ' + reason + '.')
+    constructor (msg: string) {
+      super(`Server error: ${msg}`)
       this.name = 'ServerError'
     }
 }
