@@ -22,7 +22,7 @@ const validVideoCreateDTO1: VideoDTO = {
     slug: 'titulo-1'
 }
 
-describe.skip('Create video respository', () => {
+describe.skip('Create video repository', () => {
     let prisma: PrismaClient;
 
     beforeAll(() => prisma = new PrismaClient({

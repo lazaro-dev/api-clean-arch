@@ -1,6 +1,6 @@
 import { MemoryVideoRepository } from "../../src/repositories/memory-video-repository";
 import { CreateVideo } from "../../src/use-cases/video/create-video";
-import { CreateVideoController } from "../../src/presentation/controllers/create-video-controller";
+import { CreateVideoController } from "../../src/presentation/controllers/video/create-video-controller";
 import { HttpResponse } from "../../src/presentation/controllers/ports/http-response";
 
 const sut = () => {
@@ -30,7 +30,7 @@ describe('Create video controller', () => {
         }
 
         const response: HttpResponse = await createVideoController.handle(httpRequest)
-        expect(response.statusCode).toEqual(200)
+        expect(response.statusCode).toEqual(201)
     });
 
 });

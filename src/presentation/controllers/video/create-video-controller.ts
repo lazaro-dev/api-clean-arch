@@ -1,9 +1,9 @@
 import { UseCase } from "@/use-cases/ports";
-import { ok, serverError, badRequest } from "@/presentation/controllers//helpers";
-import { HttpRequest } from "./ports/http-request";
-import { HttpResponse } from "./ports/http-response";
-import { MissingParamError } from "./errors/missing-parma-error";
-import { getMissingParams } from "./helpers/validate-fields";
+import { create, serverError, badRequest } from "@/presentation/controllers//helpers";
+import { HttpRequest } from "../ports/http-request";
+import { HttpResponse } from "../ports/http-response";
+import { MissingParamError } from "../errors/missing-parma-error";
+import { getMissingParams } from "../helpers/validate-fields";
 
 export class CreateVideoController {
     constructor(private readonly createVideo: UseCase){}
@@ -19,7 +19,7 @@ export class CreateVideoController {
             if(videoOrError.isLeft())
                 return badRequest(videoOrError.value)
 
-            return ok(videoOrError.value)
+            return create(videoOrError.value)
         } catch (error) {
             return serverError('Internal Server Error')
         }
