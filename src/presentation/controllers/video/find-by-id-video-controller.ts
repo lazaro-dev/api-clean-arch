@@ -1,25 +1,21 @@
-import { UseCase } from "@/use-cases/ports";
-import { create, serverError, badRequest } from "@/presentation/controllers//helpers";
+import { UseCase } from "@src/use-cases/ports";
+import { ok, serverError, badRequest } from "@src/presentation/controllers//helpers";
 import { HttpRequest } from "../ports/http-request";
 import { HttpResponse } from "../ports/http-response";
 import { getMissingParams } from "../helpers/validate-fields";
 import { MissingParamError } from "../errors/missing-parma-error";
 
-export class FindByIdVideo {
-    constructor(private readonly createVideo: UseCase){}
+export class FindByIdVideoController {
+    constructor(private readonly findById: UseCase){}
 
     async handle(httpRequest: HttpRequest): Promise<HttpResponse>
     {
         try {
-            const missingParams: string = getMissingParams(httpRequest, ['url', 'title', 'slug', 'filename'])
+            const missingParams: string = getMissingParams(httpRequest, ['id'])
             if (missingParams)
                 return badRequest(new MissingParamError(missingParams))
 
-            const videoOrError = await this.createVideo.execute(httpRequest.body.id)
-            if(videoOrError.isLeft())
-                return badRequest(videoOrError.value)
-
-            return create(videoOrError.value)
+            return ok(await this.findById.execute(httpRequest.body.id))
         } catch (error) {
             return serverError('Internal Server Error')
         }
