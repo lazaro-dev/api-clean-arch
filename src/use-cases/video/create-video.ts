@@ -1,11 +1,11 @@
-import { Either, left, right } from '@/shared/either';
-import { InvalidSlugError } from '@/domain/errors/invalid-slug-error';
+import { Either, left, right } from '@src/shared/either';
+import { InvalidSlugError } from '@src/domain/errors/invalid-slug-error';
 import { Video } from '../../domain/entities/video/Video';
-import { UseCase } from '@/use-cases/ports/use-case';
-import { VideoRepository } from '@/repositories/ports/video-repository';
-import { VideoDTO } from '@/domain/entities/video/video-dto';
-import { HttpRequest } from '@/presentation/controllers/ports/http-request';
-import { SlugGenerateService } from '@/external/services';
+import { UseCase } from '@src/use-cases/ports/use-case';
+import { VideoRepository } from '@src/repositories/ports/video-repository';
+import { VideoDTO } from '@src/domain/entities/video/video-dto';
+import { HttpRequest } from '@src/presentation/controllers/ports/http-request';
+import { SlugGenerateService } from '@src/external/services';
 
 export class CreateVideo implements UseCase
 {

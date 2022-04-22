@@ -1,5 +1,5 @@
-import { UseCase } from "@/use-cases/ports";
-import { create, serverError, badRequest } from "@/presentation/controllers//helpers";
+import { UseCase } from "@src/use-cases/ports";
+import { create, serverError, badRequest } from "@src/presentation/controllers//helpers";
 import { HttpRequest } from "../ports/http-request";
 import { HttpResponse } from "../ports/http-response";
 import { MissingParamError } from "../errors/missing-parma-error";

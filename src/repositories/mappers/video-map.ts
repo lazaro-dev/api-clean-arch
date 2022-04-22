@@ -1,6 +1,6 @@
-import { VideoDTO } from '@/domain/entities/video/video-dto';
-import { Video } from '@/domain/entities/video/Video';
-import { Mapper } from '@/main/mapper/mapper';
+import { VideoDTO } from '@src/domain/entities/video/video-dto';
+import { Video } from '@src/domain/entities/video/Video';
+import { Mapper } from '@src/main/mapper/mapper';
 import { VideoData } from '../ports';
 
 export class VideoMap extends Mapper<Video> {

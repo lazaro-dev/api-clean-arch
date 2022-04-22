@@ -1,3 +1,3 @@
-interface EntityError {
+export interface EntityError {
     message: string
 }

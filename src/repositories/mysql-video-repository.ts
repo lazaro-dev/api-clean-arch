@@ -1,5 +1,5 @@
-import { Video } from '@/domain/entities/video/Video';
-import { VideoRepository } from '@/repositories/ports/video-repository';
+import { Video } from '@src/domain/entities/video/Video';
+import { VideoRepository } from '@src/repositories/ports/video-repository';
 import { PrismaClient } from '@prisma/client';
 import { VideoData } from './ports';
 

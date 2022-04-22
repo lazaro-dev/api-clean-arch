@@ -1,6 +1,6 @@
-import { InvalidSlugError } from '@/domain/errors/invalid-slug-error';
-import { left, right, Either } from '@/shared';
-import { Slug } from '@/domain/object-values/slug';
+import { InvalidSlugError } from '@src/domain/errors/invalid-slug-error';
+import { left, right, Either } from '@src/shared';
+import { Slug } from '@src/domain/object-values/slug';
 import { VideoDTO } from './video-dto';
 import { v4 as uuidv4 } from 'uuid';
 

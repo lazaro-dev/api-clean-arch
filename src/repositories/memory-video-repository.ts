@@ -1,6 +1,6 @@
 import { VideoMap } from './mappers/video-map';
-import { Video } from '@/domain/entities/video/Video';
-import { VideoRepository } from '@/repositories/ports/video-repository';
+import { Video } from '@src/domain/entities/video/Video';
+import { VideoRepository } from '@src/repositories/ports/video-repository';
 import { VideoData } from './ports';
 
 export class MemoryVideoRepository implements VideoRepository {
@@ -13,7 +13,7 @@ export class MemoryVideoRepository implements VideoRepository {
             setTimeout(() => {
                 const result = this.videos.find(vid => vid.id == id);
                 resolve(result ? VideoMap.toData(result): null)
-            }, 100);
+            });
         })
     }
 
@@ -28,7 +28,7 @@ export class MemoryVideoRepository implements VideoRepository {
             this.videos.push(video)
             setTimeout(() => {
                 resolve(VideoMap.toData(video))
-            }, 100);
+            });
         })
     }
 }

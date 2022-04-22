@@ -1,6 +1,6 @@
-import { UseCase } from '@/use-cases/ports/use-case';
-import { VideoRepository } from '@/repositories/ports/video-repository';
-import { VideoData } from '@/repositories/ports';
+import { UseCase } from '@src/use-cases/ports/use-case';
+import { VideoRepository } from '@src/repositories/ports/video-repository';
+import { VideoData } from '@src/repositories/ports';
 
 export class FindByIdVideo implements UseCase
 {
