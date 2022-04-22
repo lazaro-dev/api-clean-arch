@@ -1,17 +1,17 @@
 {
   "name": "lazaro",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "inspect": "kill-port --port 9229 && node --inspect=0.0.0.0:9229 build/startup.js",
-    "start_watch_inspect": "nodemon --delay 80ms --watch build/ build/startup.js --exec 'npm run inspect'",
-    "start-prod": "ts-node-dev --transpile-only --respawn --ignore-watch node_modules src/main/server.ts",
-    "start": "nodemon --legacy-watch src/main/server.ts",
-    "test": "jest"
+    "build": "rimraf dist && tsc -p tsconfig-build.json",
+    "test": "jest",
+    "debug": "nodemon -L --watch ./dist --inspect=0.0.0.0:9222 --nolazy ./dist/src/main/server.js",
+    "start-dev": "ts-node-dev -r tsconfig-paths/register --respawn --ignore-watch node_modules src/main/server.ts",
+    "start-prod": "node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/main/server.js"
   },
   "dependencies": {
     "express": "^4.17.3",
+    "rimraf": "^3.0.2",
     "tsc": "^2.0.4",
     "uuidv4": "^6.2.12"
   },
@@ -29,6 +29,14 @@
     "supertest": "^6.2.2",
     "ts-node": "^10.7.0",
     "ts-node-dev": "^1.1.8",
-    "typescript": "^4.6.2"
+    "tsconfig-paths": "^3.14.1",
+    "typescript": "^4.6.3"
+  },
+  "engines": {
+    "node": "16.x"
+  },
+  "_moduleAliases": {
+    "@": "dist",
+    "@/src": "src"
   }
 }
